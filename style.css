@@ -15,51 +15,105 @@ body {
   color: #fff;
 }
 
+/* --- AJUSTES NO HEADER E ALINHAMENTO --- */
 .header {
+  border-bottom: 1px solid #222;
+  background-color: #000;
+}
+
+.nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 48px;
-  border-bottom: 1px solid #222;
-  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 32px;
+  width: 100%;
 }
 
 .nav-left, .nav-right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
+  flex: 1;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+/* Container do input para alinhar o ícone de busca interno */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #666;
+  font-size: 14px;
 }
 
 .search {
   border: 1px solid #333;
   background: transparent;
-  padding: 6px 10px;
+  padding: 6px 10px 6px 30px; /* padding esquerdo maior para o ícone */
   color: white;
+  border-radius: 4px;
+  outline: none;
 }
 
 .logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
 }
 
 .logo img {
   width: 52px;
+  display: block;
 }
 
-.nav-right a {
+/* Estilização dos links e ícones */
+.nav-left a, .nav-right a {
   color: white;
   text-decoration: none;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre o ícone e o texto */
+  transition: color 0.2s;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+  color: var(--red);
 }
 
 .live {
   border: 1px solid var(--red);
-  padding: 4px 8px;
+  padding: 6px 12px;
   font-size: 12px;
   color: var(--red);
   transition: 0.3s;
   cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+}
+
+.live-icon {
+  font-size: 8px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 
 .live:hover {
@@ -67,6 +121,7 @@ body {
   color: white;
 }
 
+/* --- CONTEÚDO PRINCIPAL (NEWS E HERO) --- */
 .news {
   background: #efefef;
   color: #111;
@@ -135,7 +190,6 @@ body {
   height: 680px;
   display: flex;
   align-items: center;
-
   background:
     linear-gradient(
       90deg,
@@ -146,7 +200,6 @@ body {
       rgba(0,0,0,0) 100%
     ),
     url('https://www.nasa.gov/wp-content/uploads/2026/04/55114649503-06b807462e-o.jpg');
-
   background-size: cover;
   background-position: center;
 }
@@ -177,9 +230,9 @@ body {
   cursor: pointer;
 }
 
+/* --- DESIGN RESPONSIVO CORRIGIDO --- */
 @media (max-width: 768px) {
-
-  .header {
+  .nav-container {
     flex-direction: column;
     gap: 20px;
     padding: 20px;
@@ -190,16 +243,22 @@ body {
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 16px;
+    flex: none;
   }
 
   .logo {
-    position: static;
-    transform: none;
+    order: -1; /* Joga a logo para o topo no mobile */
+  }
+
+  .search-container {
+    width: 100%;
+    justify-content: center;
   }
 
   .search {
-    width: 180px;
+    width: 100%;
+    max-width: 280px;
   }
 
   .news {
@@ -237,7 +296,6 @@ body {
     height: auto;
     min-height: 600px;
     padding: 60px 20px;
-    background-position: center;
   }
 
   .hero-inner {
@@ -263,7 +321,6 @@ body {
 }
 
 @media (max-width: 480px) {
-
   .hero h1 {
     font-size: 34px;
   }
@@ -272,15 +329,17 @@ body {
     font-size: 22px;
   }
 
-  .search {
+  .nav-left, .nav-right {
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
-  .nav-left {
-    flex-direction: column;
+  .search-container {
+    width: 100%;
   }
 
-  .nav-right {
-    flex-direction: column;
+  .search {
+    max-width: 100%;
   }
 }
